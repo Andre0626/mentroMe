@@ -16,7 +16,7 @@ public class User {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name = "role_id")
+    @Column(name = "role_id", nullable = false)
     private Integer roleId;
 
     @Column(name = "name", length = 200)

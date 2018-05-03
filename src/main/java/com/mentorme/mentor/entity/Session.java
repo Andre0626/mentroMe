@@ -1,16 +1,21 @@
 package com.mentorme.mentor.entity;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
 import java.sql.Date;
-
+@Setter
+@Getter
+@Entity
 @Table(name = "sessions")
 public class Session {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
+    @Column(name = "id", unique = true)
     private Long id;
 
-    @Column(name = "event_id")
+    @Column(name = "event_id", nullable = false)
     private Long evetId;
 
     @Column(name = "name")

@@ -1,13 +1,18 @@
 package com.mentorme.mentor.entity;
 
-import javax.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
+import javax.persistence.*;
+@Setter
+@Getter
+@Entity
 @Table(name = "categories")
 public class Categorie {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", unique = true)
-    private Integer id;
+    private Long id;
 
     @Column(name = "name")
     private String name;
