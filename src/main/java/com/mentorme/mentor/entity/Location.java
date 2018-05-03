@@ -1,7 +1,12 @@
 package com.mentorme.mentor.entity;
 
-import javax.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
+import javax.persistence.*;
+@Setter
+@Getter
+@Entity
 @Table(name = "locations")
 public class Location {
     @Id
