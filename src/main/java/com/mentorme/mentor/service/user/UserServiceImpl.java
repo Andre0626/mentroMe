@@ -13,7 +13,7 @@ public class UserServiceImpl implements UserService {
     public UserServiceImpl(UserRepo userRepo){ this.userRepo = userRepo;}
 
     @Override
-    public UserDto save(String name, Integer roleId) {
+    public UserDto save(String name, Long roleId) {
 
         User userEntity = UserMapper.mapEntity(name, roleId);
 

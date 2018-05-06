@@ -4,6 +4,6 @@ import com.mentorme.mentor.dto.UserDto;
 
 public interface UserService {
 
-    UserDto save(String name,Integer roleId);
+    UserDto save(String name,Long roleId);
 
 }

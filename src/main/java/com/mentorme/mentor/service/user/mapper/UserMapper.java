@@ -5,7 +5,7 @@ import com.mentorme.mentor.entity.User;
 
 public class UserMapper {
 
-    public static User mapEntity(String name, Integer roleId) {
+    public static User mapEntity(String name, Long roleId) {
         User user = new User();
         user.setName(name);
         user.setRoleId(roleId);

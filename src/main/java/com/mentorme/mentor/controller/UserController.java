@@ -6,23 +6,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-
-
 @RestController
-@RequestMapping(path = "/event")
-public class EventController {
+@RequestMapping(path = "/user")
+public class UserController {
     private UserService userService;
+    public UserController(UserService userService){this.userService = userService;}
 
-    public  EventController(UserService userService){ this.userService = userService; }
-
-    @RequestMapping(path = "add", method = RequestMethod.GET)
+    @RequestMapping(path = "/add", method = RequestMethod.GET )
     public UserDto addNewUser(){
         String name = "dan";
         long roleId  = 10;
 
-
         return userService.save(name,roleId);
     }
-
-
 }
