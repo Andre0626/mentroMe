@@ -11,7 +11,7 @@ import java.sql.Date;
 public class UserDto {
 
     private Long id;
-    private Long roleId;
+    private Integer roleId;
     private Date joinDate;
     private String name;
     private String email;

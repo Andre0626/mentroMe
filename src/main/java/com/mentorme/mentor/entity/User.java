@@ -17,7 +17,7 @@ public class User {
     private Long id;
 
     @Column(name = "role_id", nullable = false)
-    private Long roleId;
+    private Integer roleId;
 
     @Column(name = "name", length = 200)
     private String name;

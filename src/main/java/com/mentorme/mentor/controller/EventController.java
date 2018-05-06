@@ -1,9 +1,10 @@
 package com.mentorme.mentor.controller;
 
-import com.mentorme.mentor.dto.UserDto;
-import com.mentorme.mentor.service.user.UserService;
+import com.mentorme.mentor.dto.EventDto;
+import com.mentorme.mentor.service.event.EventService;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 
@@ -11,17 +12,20 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping(path = "/event")
 public class EventController {
-    private UserService userService;
 
-    public  EventController(UserService userService){ this.userService = userService; }
+    private EventService eventService;
 
-    @RequestMapping(path = "add", method = RequestMethod.GET)
-    public UserDto addNewUser(){
-        String name = "dan";
-        long roleId  = 10;
+    public EventController(EventService eventService){this.eventService = eventService;}
 
 
-        return userService.save(name,roleId);
+    @RequestMapping(path = "/add", method = RequestMethod.GET)
+    public EventDto addNewUser(@RequestParam(name = "name") String eventName,
+                               @RequestParam(name = "description", required = false) String eventDescription){
+        long categoryId = 1;
+        long locationId  = 10;
+
+
+        return eventService.save(categoryId,locationId,eventName,eventDescription);
     }
 
 

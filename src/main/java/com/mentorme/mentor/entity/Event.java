@@ -15,7 +15,7 @@ public class Event {
     private Long id;
 
     @Column(name = "category_id", nullable = false)
-    private Integer categoryId;
+    private Long categoryId;
 
     @Column(name = "location_id", nullable = false)
     private Long locationId;
