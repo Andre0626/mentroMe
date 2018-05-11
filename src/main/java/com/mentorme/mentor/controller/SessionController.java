@@ -22,6 +22,6 @@ public class SessionController {
                                     @RequestParam(value = "startDate") Date startDate,
                                     @RequestParam(value = "endDate") Date endDate){
 
-        return null;
+        return sessionService.save(eventId,name,description,startDate,endDate);
     }
 }
