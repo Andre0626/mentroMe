@@ -2,10 +2,7 @@ package com.mentorme.mentor.controller;
 
 import com.mentorme.mentor.dto.EventDto;
 import com.mentorme.mentor.service.event.EventService;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(path = "/event")
@@ -16,14 +13,18 @@ public class EventController {
     public EventController(EventService eventService){this.eventService = eventService;}
 
 
-    @RequestMapping(path = "/add", method = RequestMethod.GET)
-    public EventDto addNewUser(@RequestParam(name = "categoryId") Long categoryId,
-                               @RequestParam(name = "description", required = false) String eventDescription,
-                               @RequestParam(name = "locationId") Long locationId,
-                               @RequestParam(name = "userId") Long userId,
-                               @RequestParam(name = "name") String eventName) {
-
-        return eventService.save(categoryId,eventDescription,locationId,userId,eventName);
+    @RequestMapping(value = "/add/{roleId}", method = RequestMethod.POST)
+    public EventDto addNewUser(@PathVariable Integer roleId,
+                               @RequestParam(value = "categoryId")  Long categoryId,
+                               @RequestParam(value = "description", required = false) String eventDescription,
+                               @RequestParam(value = "locationId") Long locationId,
+                               @RequestParam(value = "userId") Long userId,
+                               @RequestParam(value = "name") String eventName) {
+        if (roleId >= 2) {
+            return eventService.save(categoryId, eventDescription, locationId, userId, eventName);
+        } else {
+            return null;
+        }
     }
 
 
