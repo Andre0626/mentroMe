@@ -12,9 +12,9 @@ public class EventServiceImpl implements EventService {
     private EventServiceImpl(EventRepo eventRepo){this.eventRepo = eventRepo;}
 
     @Override
-    public EventDto save(Long categoryId, Long locationId, String name, String description) {
+    public EventDto save(Long categoryId,String description,Long userId, Long locationId, String name) {
 
-        Event eventEntity = EventMapper.mapEntity(categoryId, locationId, name, description);
+        Event eventEntity = EventMapper.mapEntity(categoryId,description,userId, locationId, name);
 
         Event savedEvent = eventRepo.save(eventEntity);
 

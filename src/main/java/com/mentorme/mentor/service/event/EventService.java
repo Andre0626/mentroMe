@@ -4,5 +4,5 @@ import com.mentorme.mentor.dto.EventDto;
 
 public interface EventService {
     
-    EventDto save(Long categoryId, Long locationId, String name, String description);
+    EventDto save(Long categoryId,String description,Long userId, Long locationId, String name);
 }

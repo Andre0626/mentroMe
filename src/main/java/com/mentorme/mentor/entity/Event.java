@@ -14,6 +14,9 @@ public class Event {
     @Column(name = "id", unique = true)
     private Long id;
 
+    @Column(name = "user_id", unique = true)
+    private Long userId;
+
     @Column(name = "category_id", nullable = false)
     private Long categoryId;
 

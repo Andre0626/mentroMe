@@ -7,8 +7,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-
-
 @RestController
 @RequestMapping(path = "/event")
 public class EventController {
@@ -19,13 +17,13 @@ public class EventController {
 
 
     @RequestMapping(path = "/add", method = RequestMethod.GET)
-    public EventDto addNewUser(@RequestParam(name = "name") String eventName,
-                               @RequestParam(name = "description", required = false) String eventDescription){
-        long categoryId = 1;
-        long locationId  = 10;
+    public EventDto addNewUser(@RequestParam(name = "categoryId") Long categoryId,
+                               @RequestParam(name = "description", required = false) String eventDescription,
+                               @RequestParam(name = "locationId") Long locationId,
+                               @RequestParam(name = "userId") Long userId,
+                               @RequestParam(name = "name") String eventName) {
 
-
-        return eventService.save(categoryId,locationId,eventName,eventDescription);
+        return eventService.save(categoryId,eventDescription,locationId,userId,eventName);
     }
 
 

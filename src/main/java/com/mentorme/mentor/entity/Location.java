@@ -14,12 +14,12 @@ public class Location {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name = "city")
-    private String city;
+    @Column(name = "city_id")
+    private Integer cityId;
 
     @Column(name = "location")
     private String location;
 
-    @Column(name = "location_addres")
-    private String locationAddres;
+    @Column(name = "location_address")
+    private String locationAddress;
 }

@@ -8,6 +8,7 @@ import lombok.Setter;
 public class EventDto {
    
     private Long id;
+    private Long userId;
     private Long categoryId;
     private Long locationId;
     private String name;

@@ -4,6 +4,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.sql.Date;
+
 @Setter
 @Getter
 @Entity
@@ -20,4 +22,6 @@ public class Participant {
     @Column(name = "event_id", nullable = false)
     private Long eventId;
 
+    @Column(name = "join_date", nullable = false)
+    private Date joinDate;
 }
