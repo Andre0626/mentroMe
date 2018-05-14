@@ -4,6 +4,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.Collection;
+
 @Setter
 @Getter
 @Entity
@@ -28,4 +30,15 @@ public class Event {
 
     @Column(name = "description")
     private String description;
+
+    @OneToMany(mappedBy = "events", fetch = FetchType.LAZY)
+    private Collection<Session> sessions;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "category_id", referencedColumnName = "id")
+    private Category category;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "location_id", referencedColumnName = "id")
+    private Location location;
 }

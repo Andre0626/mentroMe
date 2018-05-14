@@ -16,7 +16,7 @@ public class Session {
     private Long id;
 
     @Column(name = "event_id", nullable = false)
-    private Long evetId;
+    private Long eventId;
 
     @Column(name = "name")
     private String name;
@@ -29,5 +29,9 @@ public class Session {
 
     @Column(name = "end_date")
     private Date endDate;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "event_id", referencedColumnName = "id")
+    private Event event;
 
 }

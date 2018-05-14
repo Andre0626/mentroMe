@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.Collection;
 
 @Setter
 @Getter
@@ -17,4 +18,7 @@ public class Country {
 
     @Column(name = "name", unique = true)
     private String name;
+
+    @OneToMany(mappedBy = "countries", fetch = FetchType.LAZY)
+    private Collection<City> cities;
 }

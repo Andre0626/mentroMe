@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.Collection;
 
 @Setter
 @Getter
@@ -21,5 +22,11 @@ public class City {
     @Column(name = "name",unique = true)
     private String name;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "country_id", referencedColumnName = "id")
+    private Country country;
+
+    @OneToMany(mappedBy = "city")
+    private Collection<Location> locations;
 
 }
