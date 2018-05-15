@@ -9,7 +9,8 @@ public class SessionMapper {
 
    public static SessionDto mapDto(Session session){
         SessionDto sessionDto = new SessionDto();
-        session.setEvetId(session.getEvetId());
+        session.setId(session.getId());
+        session.setEventId(session.getEventId());
         session.setName(session.getName());
         session.setDescription(session.getDescription());
         session.setStartDate(session.getStartDate());
@@ -20,7 +21,7 @@ public class SessionMapper {
 
    public static Session mapEntity(Long eventId,String name,String description,Date startDate,Date endDate){
         Session session = new Session();
-        session.setEvetId(eventId);
+        session.setEventId(eventId);
         session.setName(name);
         session.setDescription(description);
         session.setStartDate(startDate);

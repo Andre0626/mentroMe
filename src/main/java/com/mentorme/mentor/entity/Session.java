@@ -31,7 +31,7 @@ public class Session {
     private Date endDate;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "event_id", referencedColumnName = "id")
+    @JoinColumn(name = "event_id", referencedColumnName = "id",nullable = false, insertable = false, updatable = false)
     private Event event;
 
 }

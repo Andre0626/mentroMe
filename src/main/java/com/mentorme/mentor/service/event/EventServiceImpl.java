@@ -8,6 +8,9 @@ import com.mentorme.mentor.repository.EventRepo;
 import com.mentorme.mentor.service.event.mapper.EventMapper;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 public class EventServiceImpl implements EventService {
     private EventRepo eventRepo;
@@ -27,6 +30,20 @@ public class EventServiceImpl implements EventService {
         Event savedEvent = eventRepo.save(eventEntity);
 
         return EventMapper.mapDto(savedEvent);
+    }
+
+    @Override
+    public List<EventDto> getEvents() {
+       List<Event> events = eventRepo.findAll();
+       List<EventDto> result = new ArrayList<>();
+
+       if(!events.isEmpty()){
+           for (Event event:events) {
+               result.add(EventMapper.mapDto(event));
+           }
+       }
+
+       return result;
     }
 
     private Category getCategory(Long categoryId){

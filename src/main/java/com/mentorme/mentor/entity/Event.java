@@ -31,14 +31,14 @@ public class Event {
     @Column(name = "description")
     private String description;
 
-    @OneToMany(mappedBy = "events", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "event", fetch = FetchType.LAZY)
     private Collection<Session> sessions;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "category_id", referencedColumnName = "id")
+    @JoinColumn(name = "category_id", referencedColumnName = "id",nullable = false, insertable =  false, updatable = false)
     private Category category;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "location_id", referencedColumnName = "id")
+    @JoinColumn(name = "location_id", referencedColumnName = "id",nullable = false, insertable =  false, updatable = false)
     private Location location;
 }

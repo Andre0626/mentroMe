@@ -19,6 +19,6 @@ public class Country {
     @Column(name = "name", unique = true)
     private String name;
 
-    @OneToMany(mappedBy = "countries", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "country", fetch = FetchType.LAZY)
     private Collection<City> cities;
 }

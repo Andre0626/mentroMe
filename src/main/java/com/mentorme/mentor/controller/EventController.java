@@ -4,6 +4,8 @@ import com.mentorme.mentor.dto.EventDto;
 import com.mentorme.mentor.service.event.EventService;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping(path = "/event")
 public class EventController {
@@ -27,5 +29,9 @@ public class EventController {
         }
     }
 
+    @RequestMapping(value = "/getAll", method = RequestMethod.GET)
+    public List<EventDto> getEvents(){
+        return eventService.getEvents();
+    }
 
 }
