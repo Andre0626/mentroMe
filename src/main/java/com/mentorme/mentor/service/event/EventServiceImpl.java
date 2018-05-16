@@ -7,6 +7,8 @@ import com.mentorme.mentor.repository.CategoryRepo;
 import com.mentorme.mentor.repository.EventRepo;
 import com.mentorme.mentor.service.event.mapper.EventMapper;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.CollectionUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,13 +18,14 @@ public class EventServiceImpl implements EventService {
     private EventRepo eventRepo;
     private CategoryRepo categoryRepo;
 
-    private EventServiceImpl(EventRepo eventRepo,
+    public EventServiceImpl(EventRepo eventRepo,
                              CategoryRepo categoryRepo){
         this.eventRepo = eventRepo;
         this.categoryRepo = categoryRepo;
     }
 
     @Override
+    @Transactional
     public EventDto save(Long categoryId,String description,Long userId, Long locationId, String name) {
 
         Event eventEntity = EventMapper.mapEntity(categoryId,description,userId, locationId, name);
@@ -33,11 +36,12 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<EventDto> getEvents() {
        List<Event> events = eventRepo.findAll();
        List<EventDto> result = new ArrayList<>();
 
-       if(!events.isEmpty()){
+       if(CollectionUtils.isEmpty(events)){
            for (Event event:events) {
                result.add(EventMapper.mapDto(event));
            }

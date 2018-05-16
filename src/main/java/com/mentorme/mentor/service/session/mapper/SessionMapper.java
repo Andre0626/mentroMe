@@ -7,19 +7,19 @@ import java.sql.Date;
 
 public class SessionMapper {
 
-   public static SessionDto mapDto(Session session){
+    public static SessionDto mapDto(Session session) {
         SessionDto sessionDto = new SessionDto();
-        session.setId(session.getId());
-        session.setEventId(session.getEventId());
-        session.setName(session.getName());
-        session.setDescription(session.getDescription());
-        session.setStartDate(session.getStartDate());
-        session.setEndDate(session.getStartDate());
+        sessionDto.setId(session.getId());
+        sessionDto.setEventId(session.getEventId());
+        sessionDto.setName(session.getName());
+        sessionDto.setDescription(session.getDescription());
+        sessionDto.setStartDate(session.getStartDate());
+        sessionDto.setEndDate(session.getStartDate());
 
         return sessionDto;
     }
 
-   public static Session mapEntity(Long eventId,String name,String description,Date startDate,Date endDate){
+    public static Session mapEntity(Long eventId, String name, String description, Date startDate, Date endDate) {
         Session session = new Session();
         session.setEventId(eventId);
         session.setName(name);

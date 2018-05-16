@@ -1,6 +1,7 @@
 package com.mentorme.mentor.controller;
 
 import com.mentorme.mentor.dto.EventDto;
+import com.mentorme.mentor.entity.Event;
 import com.mentorme.mentor.service.event.EventService;
 import org.springframework.web.bind.annotation.*;
 

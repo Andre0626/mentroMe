@@ -14,9 +14,9 @@ public class EventMapper {
     public static EventDto mapDto(Event event){
         EventDto eventDto = new EventDto();
         eventDto.setId(event.getId());
-        eventDto.setCategoryId(event.getCategoryId());
+        eventDto.setCategoryId(event.getCategory().getId());
         eventDto.setUserId(event.getUserId());
-        eventDto.setLocationId(event.getLocationId());
+        eventDto.setLocationId(event.getCategory().getId());
         eventDto.setName(event.getName());
         eventDto.setDescription(event.getDescription());
 
@@ -32,9 +32,9 @@ public class EventMapper {
 
     public static Event mapEntity(Long categoryId,String description,Long userId, Long locationId, String name){
         Event event = new Event();
-        event.setCategoryId(categoryId);
+//        event.setCategoryId(categoryId);
         event.setUserId(userId);
-        event.setLocationId(locationId);
+//        event.setLocationId(locationId);
         event.setName(name);
         event.setDescription(description);
 

@@ -19,11 +19,11 @@ public class Event {
     @Column(name = "user_id", unique = true)
     private Long userId;
 
-    @Column(name = "category_id", nullable = false)
-    private Long categoryId;
+//    @Column(name = "category_id", nullable = false)
+//    private Long categoryId;
 
-    @Column(name = "location_id", nullable = false)
-    private Long locationId;
+//    @Column(name = "location_id", nullable = false)
+//    private Long locationId;
 
     @Column(name = "name")
     private String name;
@@ -35,10 +35,10 @@ public class Event {
     private Collection<Session> sessions;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "category_id", referencedColumnName = "id",nullable = false, insertable =  false, updatable = false)
+    @JoinColumn(name = "category_id")
     private Category category;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "location_id", referencedColumnName = "id",nullable = false, insertable =  false, updatable = false)
+    @JoinColumn(name = "location_id")
     private Location location;
 }
