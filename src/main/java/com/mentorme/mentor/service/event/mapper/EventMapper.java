@@ -1,6 +1,7 @@
 package com.mentorme.mentor.service.event.mapper;
 
 import com.mentorme.mentor.dto.EventDto;
+import com.mentorme.mentor.dto.NewEventDto;
 import com.mentorme.mentor.entity.Event;
 import com.mentorme.mentor.entity.Session;
 import com.mentorme.mentor.service.session.mapper.SessionMapper;
@@ -30,13 +31,13 @@ public class EventMapper {
         return eventDto;
     }
 
-    public static Event mapEntity(Long categoryId,String description,Long userId, Long locationId, String name){
+    public static Event mapEntity(NewEventDto newEventDto){
         Event event = new Event();
 //        event.setCategoryId(categoryId);
-        event.setUserId(userId);
+ //       event.setUserId(userId);
 //        event.setLocationId(locationId);
-        event.setName(name);
-        event.setDescription(description);
+     //   event.setName(name);
+    //    event.setDescription(description);
 
         return event;
     }

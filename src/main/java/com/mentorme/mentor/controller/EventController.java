@@ -1,6 +1,7 @@
 package com.mentorme.mentor.controller;
 
 import com.mentorme.mentor.dto.EventDto;
+import com.mentorme.mentor.dto.NewEventDto;
 import com.mentorme.mentor.entity.Event;
 import com.mentorme.mentor.service.event.EventService;
 import org.springframework.web.bind.annotation.*;
@@ -18,21 +19,22 @@ public class EventController {
 
     @RequestMapping(value = "/add/{roleId}", method = RequestMethod.POST)
     public EventDto addNewUser(@PathVariable Integer roleId,
-                               @RequestParam(value = "categoryId")  Long categoryId,
-                               @RequestParam(value = "description", required = false) String eventDescription,
-                               @RequestParam(value = "locationId") Long locationId,
-                               @RequestParam(value = "userId") Long userId,
-                               @RequestParam(value = "name") String eventName) {
+                               @RequestBody NewEventDto newEventDto) {
         if (roleId >= 2) {
-            return eventService.save(categoryId, eventDescription, locationId, userId, eventName);
+            return eventService.save(newEventDto);
         } else {
             return null;
         }
     }
 
-    @RequestMapping(value = "/getAll", method = RequestMethod.GET)
+    @RequestMapping(value = "/events", method = RequestMethod.GET)
     public List<EventDto> getEvents(){
         return eventService.getEvents();
+    }
+
+    @RequestMapping(value = "/events/{eventId}", method = RequestMethod.GET)
+    public EventDto getEvent(@PathVariable Long eventId){
+        return eventService.getEvents(eventId);
     }
 
 }

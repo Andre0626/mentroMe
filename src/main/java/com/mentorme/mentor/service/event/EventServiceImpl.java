@@ -1,12 +1,14 @@
 package com.mentorme.mentor.service.event;
 
 import com.mentorme.mentor.dto.EventDto;
+import com.mentorme.mentor.dto.NewEventDto;
 import com.mentorme.mentor.entity.Category;
 import com.mentorme.mentor.entity.Event;
 import com.mentorme.mentor.repository.CategoryRepo;
 import com.mentorme.mentor.repository.EventRepo;
 import com.mentorme.mentor.service.event.mapper.EventMapper;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
@@ -26,9 +28,9 @@ public class EventServiceImpl implements EventService {
 
     @Override
     @Transactional
-    public EventDto save(Long categoryId,String description,Long userId, Long locationId, String name) {
+    public EventDto save(NewEventDto newEventDto) {
 
-        Event eventEntity = EventMapper.mapEntity(categoryId,description,userId, locationId, name);
+        Event eventEntity = EventMapper.mapEntity(newEventDto);
 
         Event savedEvent = eventRepo.save(eventEntity);
 
@@ -36,7 +38,7 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    @Transactional(readOnly = true)
+    @Transactional(readOnly = true, isolation = Isolation.SERIALIZABLE )
     public List<EventDto> getEvents() {
        List<Event> events = eventRepo.findAll();
        List<EventDto> result = new ArrayList<>();
@@ -49,6 +51,15 @@ public class EventServiceImpl implements EventService {
 
        return result;
     }
+
+    @Override
+    @Transactional(readOnly = true)
+    public  EventDto getEvents(Long eventId){
+        Event event = eventRepo.getOne(eventId);
+
+        return EventMapper.mapDto(event);
+    }
+
 
     private Category getCategory(Long categoryId){
        Category category;
