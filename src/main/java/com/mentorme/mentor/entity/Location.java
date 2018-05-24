@@ -25,7 +25,7 @@ public class Location {
     @Column(name = "location_address")
     private String locationAddress;
 
-    @OneToMany(mappedBy = "location")
+    @OneToMany(mappedBy = "locations")
     private Collection<Event> events;
 
     @ManyToOne(fetch = FetchType.LAZY)

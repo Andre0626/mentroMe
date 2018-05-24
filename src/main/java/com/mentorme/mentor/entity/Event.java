@@ -19,11 +19,11 @@ public class Event {
     @Column(name = "user_id", unique = true)
     private Long userId;
 
-//    @Column(name = "category_id", nullable = false)
-//    private Long categoryId;
+    @Column(name = "category_id", nullable = false, insertable = false,updatable = false)
+    private Long categoryId;
 
-//    @Column(name = "location_id", nullable = false)
-//    private Long locationId;
+    @Column(name = "location_id", nullable = false, insertable = false, updatable = false)
+    private Long locationId;
 
     @Column(name = "name")
     private String name;
@@ -40,5 +40,5 @@ public class Event {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "location_id")
-    private Location location;
+    private Location locations;
 }

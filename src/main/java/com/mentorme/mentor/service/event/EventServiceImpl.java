@@ -2,8 +2,7 @@ package com.mentorme.mentor.service.event;
 
 import com.mentorme.mentor.dto.EventDto;
 import com.mentorme.mentor.dto.NewEventDto;
-import com.mentorme.mentor.entity.Category;
-import com.mentorme.mentor.entity.Event;
+import com.mentorme.mentor.entity.*;
 import com.mentorme.mentor.repository.CategoryRepo;
 import com.mentorme.mentor.repository.EventRepo;
 import com.mentorme.mentor.service.event.mapper.EventMapper;
@@ -30,7 +29,9 @@ public class EventServiceImpl implements EventService {
     @Transactional
     public EventDto save(NewEventDto newEventDto) {
 
-        Event eventEntity = EventMapper.mapEntity(newEventDto);
+        Category category = getCategory(newEventDto.getCategoryId());
+
+        Event eventEntity = EventMapper.mapEntity(newEventDto, category);
 
         Event savedEvent = eventRepo.save(eventEntity);
 
