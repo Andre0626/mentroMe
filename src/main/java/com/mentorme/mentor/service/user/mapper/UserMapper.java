@@ -1,18 +1,17 @@
 package com.mentorme.mentor.service.user.mapper;
 
+import com.mentorme.mentor.dto.NewUserDto;
 import com.mentorme.mentor.dto.UserDto;
 import com.mentorme.mentor.entity.User;
 
-import java.sql.Date;
-
 public class UserMapper {
 
-    public static User mapEntity(Integer roleId,String name,String email,Date joinDate) {
+    public static User mapEntity(NewUserDto newUserDto) {
         User user = new User();
-        user.setName(name);
-        user.setRoleId(roleId);
-        user.setEmail(email);
-        user.setJoinDate(joinDate);
+        user.setName(newUserDto.getUserName());
+        user.setRoleId(newUserDto.getRoleId());
+        user.setEmail(newUserDto.getUserEmail());
+        user.setJoinDate(newUserDto.getJoinDate());
 
         return user;
     }

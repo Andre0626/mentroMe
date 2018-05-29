@@ -1,29 +1,39 @@
 package com.mentorme.mentor.controller;
 
+import java.util.List;
+import com.mentorme.mentor.dto.NewUserDto;
 import com.mentorme.mentor.dto.UserDto;
+import com.mentorme.mentor.entity.User;
 import com.mentorme.mentor.service.user.UserService;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.sql.Date;
-
 @RestController
-@RequestMapping(path = "/user")
+@RequestMapping(path = "/users")
 public class UserController {
 
     private UserService userService;
 
     public UserController(UserService userService){this.userService = userService;}
 
-    @RequestMapping(path = "/add", method = RequestMethod.GET )
-    public UserDto addNewUser(@RequestParam(name = "name") String userName,
-                              @RequestParam(name = "email") String userEmail,
-                              @RequestParam(name = "joinDate")Date joinDate,
-                              @RequestParam(name = "roleId") Integer roleId){
+    @RequestMapping(method = RequestMethod.POST )
+    public UserDto addUser(@RequestBody NewUserDto newUserDto){
 
+        return userService.save(newUserDto);
+    }
 
-        return userService.save(roleId,userName,userEmail,joinDate);
+    @RequestMapping(method = RequestMethod.GET)
+    public List<User> allUsers(){
+
+        return userService.allUsers();
+    }
+
+    @RequestMapping(value ="/{id}", method = RequestMethod.GET)
+    public UserDto userById(@PathVariable Long id){
+
+        return userService.userById(id);
     }
 }

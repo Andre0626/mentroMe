@@ -5,6 +5,7 @@ import com.mentorme.mentor.dto.NewEventDto;
 import com.mentorme.mentor.entity.*;
 import com.mentorme.mentor.repository.CategoryRepo;
 import com.mentorme.mentor.repository.EventRepo;
+import com.mentorme.mentor.repository.LocationRepo;
 import com.mentorme.mentor.service.event.mapper.EventMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
@@ -18,20 +19,23 @@ import java.util.List;
 public class EventServiceImpl implements EventService {
     private EventRepo eventRepo;
     private CategoryRepo categoryRepo;
+    private LocationRepo locationRepo;
 
     public EventServiceImpl(EventRepo eventRepo,
-                             CategoryRepo categoryRepo){
+                            CategoryRepo categoryRepo,
+                            LocationRepo locationRepo){
         this.eventRepo = eventRepo;
         this.categoryRepo = categoryRepo;
+        this.locationRepo = locationRepo;
     }
 
     @Override
     @Transactional
     public EventDto save(NewEventDto newEventDto) {
-
+        
         Category category = getCategory(newEventDto.getCategoryId());
-
-        Event eventEntity = EventMapper.mapEntity(newEventDto, category);
+        Location location = getLocation(newEventDto.getLocationId());
+        Event eventEntity = EventMapper.mapEntity(newEventDto, category,location);
 
         Event savedEvent = eventRepo.save(eventEntity);
 
@@ -63,9 +67,12 @@ public class EventServiceImpl implements EventService {
 
 
     private Category getCategory(Long categoryId){
-       Category category;
-        category = categoryRepo.getOne(categoryId);
 
-        return category;
+        return categoryRepo.getOne(categoryId);
+    }
+
+    private Location getLocation(Long locationId){
+
+        return locationRepo.getOne(locationId);
     }
 }

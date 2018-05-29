@@ -17,7 +17,7 @@ public class EventController {
     private EventService eventService;
 
     @RequestMapping(value = "/add/{roleId}", method = RequestMethod.POST)
-    public EventDto addNewUser(@PathVariable Integer roleId,
+    public EventDto addUser(@PathVariable Integer roleId,
                                @RequestBody NewEventDto newEventDto) {
         if (roleId >= 2) {
             return eventService.save(newEventDto);

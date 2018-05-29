@@ -6,9 +6,10 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.util.Collection;
 
-@Setter
-@Getter
+
 @Entity
+@Getter
+@Setter
 @Table(name = "locations")
 public class Location {
     @Id

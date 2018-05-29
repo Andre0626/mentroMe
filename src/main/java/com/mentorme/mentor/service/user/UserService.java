@@ -1,11 +1,17 @@
 package com.mentorme.mentor.service.user;
 
+import java.util.List;
+import com.mentorme.mentor.dto.NewUserDto;
 import com.mentorme.mentor.dto.UserDto;
+import com.mentorme.mentor.entity.User;
 
-import java.sql.Date;
 
 public interface UserService {
 
-    UserDto save(Integer roleId,String userName,String userEmail,Date joinDate);
+    UserDto save(NewUserDto newUserDto);
+
+    List<User> allUsers();
+
+    UserDto userById(Long roleId);
 
 }
