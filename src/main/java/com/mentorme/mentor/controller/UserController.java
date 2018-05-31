@@ -2,6 +2,7 @@ package com.mentorme.mentor.controller;
 
 import java.util.List;
 import com.mentorme.mentor.dto.NewUserDto;
+import com.mentorme.mentor.dto.UpdateUserDto;
 import com.mentorme.mentor.dto.UserDto;
 import com.mentorme.mentor.entity.User;
 import com.mentorme.mentor.service.user.UserService;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -34,6 +36,12 @@ public class UserController {
     @RequestMapping(value ="/{id}", method = RequestMethod.GET)
     public UserDto userById(@PathVariable Long id){
 
-        return userService.userById(id);
+        return userService.findById(id);
+    }
+
+    @RequestMapping(method = RequestMethod.PUT)
+    public UserDto update(@RequestBody UpdateUserDto updateUserDto){
+
+        return userService.update(updateUserDto);
     }
 }
