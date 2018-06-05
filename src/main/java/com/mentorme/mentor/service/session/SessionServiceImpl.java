@@ -1,7 +1,7 @@
 package com.mentorme.mentor.service.session;
 
 
-import com.mentorme.mentor.dto.SessionDto;
+import com.mentorme.mentor.dto.Session.SessionDto;
 import com.mentorme.mentor.entity.Session;
 import com.mentorme.mentor.repository.SessionRepo;
 import com.mentorme.mentor.service.session.mapper.SessionMapper;

@@ -1,6 +1,6 @@
 package com.mentorme.mentor.controller;
 
-import com.mentorme.mentor.dto.SessionDto;
+import com.mentorme.mentor.dto.Session.SessionDto;
 import com.mentorme.mentor.service.session.SessionService;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;

@@ -1,6 +1,6 @@
 package com.mentorme.mentor.service.category;
 
-import com.mentorme.mentor.dto.CategoryDto;
+import com.mentorme.mentor.dto.Category.CategoryDto;
 import com.mentorme.mentor.entity.Category;
 import com.mentorme.mentor.repository.CategoryRepo;
 import com.mentorme.mentor.service.category.mapper.CategoryMapper;

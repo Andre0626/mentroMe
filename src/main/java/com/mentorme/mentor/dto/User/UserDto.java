@@ -1,17 +1,20 @@
-package com.mentorme.mentor.dto;
+package com.mentorme.mentor.dto.User;
 
-import java.sql.Date;
+
 import lombok.Getter;
 import lombok.Setter;
 
-@Setter
+import java.sql.Date;
+
 @Getter
-public class UpdateUserDto {
+@Setter
+public class UserDto {
 
     private Long id;
-    private Date updateDate;
     private Integer roleId;
+    private Date joinDate;
     private String name;
     private String email;
 
 }
+

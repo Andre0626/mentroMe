@@ -1,6 +1,6 @@
 package com.mentorme.mentor.service.category.mapper;
 
-import com.mentorme.mentor.dto.CategoryDto;
+import com.mentorme.mentor.dto.Category.CategoryDto;
 import com.mentorme.mentor.entity.Category;
 
 public class CategoryMapper {

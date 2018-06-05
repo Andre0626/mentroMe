@@ -1,9 +1,9 @@
 package com.mentorme.mentor.service.user;
 
 import java.util.List;
-import com.mentorme.mentor.dto.NewUserDto;
-import com.mentorme.mentor.dto.UpdateUserDto;
-import com.mentorme.mentor.dto.UserDto;
+import com.mentorme.mentor.dto.User.NewUserDto;
+import com.mentorme.mentor.dto.User.UpdateUserDto;
+import com.mentorme.mentor.dto.User.UserDto;
 import com.mentorme.mentor.entity.User;
 
 
@@ -11,9 +11,13 @@ public interface UserService {
 
     UserDto save(NewUserDto newUserDto);
 
-    List<User> allUsers();
+    List<User> getAll();
 
     UserDto findById(Long id);
 
+    List<UserDto> findByRoleId(Integer roleId);
+
     UserDto update(UpdateUserDto updateUserDto);
+
+    void delete(Long id);
 }

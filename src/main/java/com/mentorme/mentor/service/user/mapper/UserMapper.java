@@ -1,9 +1,8 @@
 package com.mentorme.mentor.service.user.mapper;
 
-import javax.jws.soap.SOAPBinding;
-import com.mentorme.mentor.dto.NewUserDto;
-import com.mentorme.mentor.dto.UpdateUserDto;
-import com.mentorme.mentor.dto.UserDto;
+import com.mentorme.mentor.dto.User.NewUserDto;
+import com.mentorme.mentor.dto.User.UpdateUserDto;
+import com.mentorme.mentor.dto.User.UserDto;
 import com.mentorme.mentor.entity.User;
 
 public class UserMapper {

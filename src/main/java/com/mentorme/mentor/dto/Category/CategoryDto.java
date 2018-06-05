@@ -1,4 +1,4 @@
-package com.mentorme.mentor.dto;
+package com.mentorme.mentor.dto.Category;
 
 import lombok.Getter;
 import lombok.Setter;

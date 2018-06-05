@@ -1,6 +1,6 @@
 package com.mentorme.mentor.controller;
 
-import com.mentorme.mentor.dto.CategoryDto;
+import com.mentorme.mentor.dto.Category.CategoryDto;
 import com.mentorme.mentor.service.category.CategoryService;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;

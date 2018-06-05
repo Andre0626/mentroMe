@@ -1,10 +1,11 @@
-package com.mentorme.mentor.dto;
+package com.mentorme.mentor.dto.Event;
 
 import lombok.Getter;
 import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
+import com.mentorme.mentor.dto.Session.SessionDto;
 
 @Getter
 @Setter

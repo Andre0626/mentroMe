@@ -1,10 +1,10 @@
 package com.mentorme.mentor.service.user;
 
 import java.util.List;
-import javax.jws.soap.SOAPBinding;
-import com.mentorme.mentor.dto.NewUserDto;
-import com.mentorme.mentor.dto.UpdateUserDto;
-import com.mentorme.mentor.dto.UserDto;
+import java.util.stream.Collectors;
+import com.mentorme.mentor.dto.User.NewUserDto;
+import com.mentorme.mentor.dto.User.UpdateUserDto;
+import com.mentorme.mentor.dto.User.UserDto;
 import com.mentorme.mentor.entity.User;
 import com.mentorme.mentor.repository.UserRepo;
 import com.mentorme.mentor.service.user.mapper.UserMapper;
@@ -29,7 +29,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> allUsers() {
+    public List<User> getAll() {
         return userRepo.findAll();
     }
 
@@ -40,6 +40,15 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public List<UserDto> findByRoleId(Integer roleId){
+        List<User> users = userRepo.findAllByRoleId(roleId);
+
+        return users.stream()
+                .map(UserMapper::mapDto)
+                .collect(Collectors.toList());
+    }
+
+    @Override
     public UserDto update(UpdateUserDto updateUserDto) {
         User userEntity = getUserEntity(updateUserDto.getId());
         userEntity = UserMapper.mapEntity(userEntity, updateUserDto);
@@ -47,9 +56,15 @@ public class UserServiceImpl implements UserService {
         return UserMapper.mapDto(userRepo.save(userEntity));
     }
 
+    @Override public void delete(Long id){
+        userRepo.deleteById(id);
+        System.out.println("the user with ID :" + id + "was deleted");
+    }
+
     private User getUserEntity(Long userId) {
         User userEntity = userRepo.getOne(userId);
         Assert.notNull(userEntity, "User with id = " + userId + "does not exist");
         return userEntity;
     }
+
 }

@@ -1,6 +1,6 @@
 package com.mentorme.mentor.service.session;
 
-import com.mentorme.mentor.dto.SessionDto;
+import com.mentorme.mentor.dto.Session.SessionDto;
 
 import java.sql.Date;
 

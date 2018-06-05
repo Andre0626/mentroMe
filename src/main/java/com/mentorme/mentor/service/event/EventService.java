@@ -1,8 +1,7 @@
 package com.mentorme.mentor.service.event;
 
-import com.mentorme.mentor.dto.EventDto;
-import com.mentorme.mentor.dto.NewEventDto;
-import com.mentorme.mentor.entity.Event;
+import com.mentorme.mentor.dto.Event.EventDto;
+import com.mentorme.mentor.dto.Event.NewEventDto;
 
 import java.util.List;
 
