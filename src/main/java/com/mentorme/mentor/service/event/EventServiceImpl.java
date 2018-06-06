@@ -7,6 +7,7 @@ import com.mentorme.mentor.repository.CategoryRepo;
 import com.mentorme.mentor.repository.EventRepo;
 import com.mentorme.mentor.repository.LocationRepo;
 import com.mentorme.mentor.service.event.mapper.EventMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,8 +18,12 @@ import java.util.List;
 
 @Service
 public class EventServiceImpl implements EventService {
+
+    @Autowired
     private EventRepo eventRepo;
+    @Autowired
     private CategoryRepo categoryRepo;
+    @Autowired
     private LocationRepo locationRepo;
 
     public EventServiceImpl(EventRepo eventRepo,

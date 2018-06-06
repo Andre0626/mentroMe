@@ -1,6 +1,7 @@
 package com.mentorme.mentor.service.user;
 
 import java.util.List;
+import java.util.logging.*;
 import java.util.stream.Collectors;
 import com.mentorme.mentor.dto.User.NewUserDto;
 import com.mentorme.mentor.dto.User.UpdateUserDto;
@@ -14,6 +15,8 @@ import org.springframework.util.Assert;
 
 @Service
 public class UserServiceImpl implements UserService {
+    private static final Logger LOGGER = Logger.getLogger(UserServiceImpl.class.getName());
+
     private UserRepo userRepo;
 
     public UserServiceImpl(UserRepo userRepo){ this.userRepo = userRepo;}
@@ -58,7 +61,7 @@ public class UserServiceImpl implements UserService {
 
     @Override public void delete(Long id){
         userRepo.deleteById(id);
-        System.out.println("the user with ID :" + id + "was deleted");
+        LOGGER.info("successful delete user id :" + id);
     }
 
     private User getUserEntity(Long userId) {

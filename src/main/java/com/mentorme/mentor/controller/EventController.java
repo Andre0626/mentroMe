@@ -12,8 +12,10 @@ import java.util.List;
 @RequestMapping(path = "/event")
 public class EventController {
 
-    @Autowired
-    private EventService eventService;
+   @Autowired
+   private EventService eventService;
+
+   public EventController(EventService eventService){this.eventService = eventService;}
 
     @RequestMapping(value = "/add/{roleId}", method = RequestMethod.POST)
     public EventDto addUser(@PathVariable Integer roleId,
