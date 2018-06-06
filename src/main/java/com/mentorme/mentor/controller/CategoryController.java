@@ -13,7 +13,7 @@ public class CategoryController {
 
     public CategoryController(CategoryService categoryService){this.categoryService = categoryService;}
 
-    @RequestMapping(name = "/add", method = RequestMethod.GET)
+    @RequestMapping(name = "/add", method = RequestMethod.PUT)
     public CategoryDto addNewCategory(@RequestParam(name = "name") String name,
                                       @RequestParam(name = "description", required = false) String description){
 

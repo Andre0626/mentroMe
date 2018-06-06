@@ -1,5 +1,6 @@
 package com.mentorme.mentor.controller;
 
+import com.mentorme.mentor.Exceptions.UserExceptions;
 import com.mentorme.mentor.dto.Event.EventDto;
 import com.mentorme.mentor.dto.Event.NewEventDto;
 import com.mentorme.mentor.service.event.EventService;
@@ -19,11 +20,12 @@ public class EventController {
 
     @RequestMapping(value = "/add/{roleId}", method = RequestMethod.POST)
     public EventDto addUser(@PathVariable Integer roleId,
-                               @RequestBody NewEventDto newEventDto) {
+                            @RequestBody NewEventDto newEventDto) {
+
         if (roleId >= 2) {
             return eventService.save(newEventDto);
         } else {
-            return null;
+           throw new UserExceptions("### Invalid RoleID ###");
         }
     }
 
