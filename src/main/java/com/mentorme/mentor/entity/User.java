@@ -28,6 +28,6 @@ public class User {
     @Column(name = "join_date")
     private LocalDateTime joinDate;
 
-    @Column(name = "update_date_user")
+    @Column(name = "last_update")
     private LocalDateTime updateDateUser;
 }
