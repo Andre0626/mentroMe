@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.Collection;
 
 @Setter
@@ -21,6 +22,12 @@ public class Category {
 
     @Column(name = "description")
     private String description;
+
+    @Column(name = "join_date")
+    private LocalDateTime joinDate;
+
+    @Column(name = "update_date")
+    private LocalDateTime updateDate;
 
     @OneToMany(mappedBy = "category")
     private Collection<Event> events;

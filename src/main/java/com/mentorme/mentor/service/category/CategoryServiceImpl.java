@@ -1,6 +1,11 @@
 package com.mentorme.mentor.service.category;
 
+import java.time.LocalDateTime;
+import java.util.List;
+import java.util.stream.Collectors;
 import com.mentorme.mentor.dto.Category.CategoryDto;
+import com.mentorme.mentor.dto.Category.NewCategoryDto;
+import com.mentorme.mentor.dto.Category.UpdateCategoryDto;
 import com.mentorme.mentor.entity.Category;
 import com.mentorme.mentor.repository.CategoryRepo;
 import com.mentorme.mentor.service.category.mapper.CategoryMapper;
@@ -15,12 +20,37 @@ public class CategoryServiceImpl implements CategoryService{
 
     public CategoryServiceImpl(CategoryRepo categoryRepo){this.categoryRepo = categoryRepo;}
 
-    @Override
-    public CategoryDto save(String name, String description) {
+    private static LocalDateTime localDateTime = LocalDateTime.now();
 
-        Category category = CategoryMapper.mapEntity(name, description);
+    @Override
+    public CategoryDto save(NewCategoryDto newCategoryDto) {
+
+        Category category = CategoryMapper.mapEntity(newCategoryDto,localDateTime);
 
         Category savedCategory = categoryRepo.save(category);
         return CategoryMapper.mapDto(savedCategory);
+    }
+
+    @Override
+    public CategoryDto update(UpdateCategoryDto updateCategoryDto) {
+
+        Category category = getCategory(updateCategoryDto.getId());
+                 category = CategoryMapper.mapEntity(category,updateCategoryDto,localDateTime);
+
+        return CategoryMapper.mapDto(categoryRepo.save(category));
+    }
+
+    @Override
+    public List<CategoryDto> getAll() {
+        List<Category> categories = categoryRepo.findAll();
+
+        return  categories.stream()
+                .map(CategoryMapper::mapDto)
+                .collect(Collectors.toList());
+    }
+
+    private Category getCategory(Long id){
+
+        return  categoryRepo.getOne(id);
     }
 }
