@@ -1,6 +1,5 @@
 package com.mentorme.mentor.dto.User;
 
-import java.sql.Date;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -9,7 +8,6 @@ import lombok.Setter;
 public class UpdateUserDto {
 
     private Long id;
-    private Date updateDate;
     private Integer roleId;
     private String name;
     private String email;

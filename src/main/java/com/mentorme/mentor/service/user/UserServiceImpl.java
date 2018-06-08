@@ -1,5 +1,7 @@
 package com.mentorme.mentor.service.user;
 
+import java.time.LocalDateTime;
+import java.util.Comparator;
 import java.util.List;
 import java.util.logging.*;
 import java.util.stream.Collectors;
@@ -9,6 +11,7 @@ import com.mentorme.mentor.dto.User.UserDto;
 import com.mentorme.mentor.entity.User;
 import com.mentorme.mentor.repository.UserRepo;
 import com.mentorme.mentor.service.user.mapper.UserMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
@@ -16,7 +19,9 @@ import org.springframework.util.Assert;
 @Service
 public class UserServiceImpl implements UserService {
     private static final Logger LOGGER = Logger.getLogger(UserServiceImpl.class.getName());
+    private static LocalDateTime localDateTime = LocalDateTime.now();
 
+    @Autowired
     private UserRepo userRepo;
 
     public UserServiceImpl(UserRepo userRepo){ this.userRepo = userRepo;}
@@ -24,7 +29,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserDto save(NewUserDto newUserDto) {
 
-        User userEntity = UserMapper.mapEntity(newUserDto);
+        User userEntity = UserMapper.mapEntity(newUserDto,localDateTime);
 
         User savedUser = userRepo.save(userEntity);
 
@@ -32,8 +37,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> getAll() {
-        return userRepo.findAll();
+    public List<UserDto> getAll() {
+        List<User> allUsers = userRepo.findAll();
+
+        return   allUsers.stream()
+                .sorted(Comparator.comparing(User::getJoinDate))
+                .map(UserMapper::mapDto)
+                .collect(Collectors.toList());
     }
 
     @Override
@@ -54,7 +64,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserDto update(UpdateUserDto updateUserDto) {
         User userEntity = getUserEntity(updateUserDto.getId());
-        userEntity = UserMapper.mapEntity(userEntity, updateUserDto);
+        userEntity = UserMapper.mapEntity(userEntity, updateUserDto, localDateTime);
 
         return UserMapper.mapDto(userRepo.save(userEntity));
     }

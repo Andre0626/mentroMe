@@ -11,7 +11,7 @@ public interface UserService {
 
     UserDto save(NewUserDto newUserDto);
 
-    List<User> getAll();
+    List<UserDto> getAll();
 
     UserDto findById(Long id);
 

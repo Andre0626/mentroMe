@@ -27,7 +27,7 @@ public class UserController {
     }
 
     @RequestMapping(method = RequestMethod.GET)
-    public List<User> getAll(){
+    public List<UserDto> getAll(){
 
         return userService.getAll();
     }

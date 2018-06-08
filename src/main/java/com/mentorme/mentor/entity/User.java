@@ -4,7 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.sql.Date;
+import java.time.LocalDateTime;
 
 @Setter
 @Getter
@@ -26,5 +26,8 @@ public class User {
     private String email;
 
     @Column(name = "join_date")
-    private Date joinDate;
+    private LocalDateTime joinDate;
+
+    @Column(name = "update_date_user")
+    private LocalDateTime updateDateUser;
 }
