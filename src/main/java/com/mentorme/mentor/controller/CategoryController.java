@@ -39,11 +39,11 @@ public class CategoryController {
         return categoryService.findAll();
     }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public CategoryDto findOne(@PathVariable Long id){
+  /*  @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    public CategoryDto findOne(@PathVariable Long id) {
 
         return categoryService.findOne(id);
-    }
+    }*/
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public void delete(@PathVariable Long id){
