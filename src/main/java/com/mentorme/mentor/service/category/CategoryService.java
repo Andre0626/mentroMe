@@ -4,7 +4,6 @@ import java.util.List;
 import com.mentorme.mentor.dto.Category.CategoryDto;
 import com.mentorme.mentor.dto.Category.NewCategoryDto;
 import com.mentorme.mentor.dto.Category.UpdateCategoryDto;
-import com.mentorme.mentor.entity.Category;
 
 public interface CategoryService {
 
@@ -12,5 +11,9 @@ public interface CategoryService {
 
     CategoryDto update(UpdateCategoryDto updateCategoryDto);
 
-    List<CategoryDto> getAll();
+    List<CategoryDto> findAll();
+
+    CategoryDto findOne(Long id);
+
+    void delete(Long id);
 }

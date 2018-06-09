@@ -2,6 +2,7 @@ package com.mentorme.mentor.service.category;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 import com.mentorme.mentor.dto.Category.CategoryDto;
 import com.mentorme.mentor.dto.Category.NewCategoryDto;
@@ -14,6 +15,8 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class CategoryServiceImpl implements CategoryService{
+
+    private static Logger logger = Logger.getLogger(CategoryServiceImpl.class.getName());
 
     @Autowired
     private CategoryRepo categoryRepo;
@@ -41,7 +44,7 @@ public class CategoryServiceImpl implements CategoryService{
     }
 
     @Override
-    public List<CategoryDto> getAll() {
+    public List<CategoryDto> findAll() {
         List<Category> categories = categoryRepo.findAll();
 
         return  categories.stream()
@@ -49,8 +52,21 @@ public class CategoryServiceImpl implements CategoryService{
                 .collect(Collectors.toList());
     }
 
+    @Override
+    public CategoryDto findOne(Long id) {
+       Category category = categoryRepo.getOne(id);
+
+        return CategoryMapper.mapDto(category);
+    }
+
     private Category getCategory(Long id){
 
         return  categoryRepo.getOne(id);
+    }
+
+    public void delete(Long id){
+
+        categoryRepo.delete(getCategory(id));
+        logger.info("category " + getCategory(id).getName() + "was deleted");
     }
 }
