@@ -1,4 +1,4 @@
-package com.mentorme.security;
+package com.mentorme.mentor.security;
 
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.filter.GenericFilterBean;
@@ -17,6 +17,7 @@ public class JWTAuthenticationFilter extends GenericFilterBean {
                          ServletResponse response,
                          FilterChain filterChain)
             throws IOException, ServletException {
+
         Authentication authentication = TokenAuthenticationService
                 .getAuthentication((HttpServletRequest)request);
 

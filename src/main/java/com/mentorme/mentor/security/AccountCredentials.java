@@ -1,4 +1,4 @@
-package com.mentorme.security;
+package com.mentorme.mentor.security;
 
 import lombok.Getter;
 import lombok.Setter;

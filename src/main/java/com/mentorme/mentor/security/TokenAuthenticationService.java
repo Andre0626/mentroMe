@@ -1,4 +1,4 @@
-package com.mentorme.security;
+package com.mentorme.mentor.security;
 
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;

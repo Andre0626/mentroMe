@@ -1,4 +1,4 @@
-package com.mentorme.security;
+package com.mentorme.mentor.security;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -26,15 +26,18 @@ public class JWTLoginFilter extends AbstractAuthenticationProcessingFilter {
     public Authentication attemptAuthentication(
             HttpServletRequest req, HttpServletResponse res)
             throws AuthenticationException, IOException, ServletException {
+
         AccountCredentials creds = new ObjectMapper()
                 .readValue(req.getInputStream(), AccountCredentials.class);
-        return getAuthenticationManager().authenticate(
-                new UsernamePasswordAuthenticationToken(
-                        creds.getPassword(),
-                        creds.getPassword(),
-                        Collections.emptyList()
-                )
-        );
+
+        AuthenticationManager manager = getAuthenticationManager();
+        Authentication authentication = manager.authenticate(new UsernamePasswordAuthenticationToken(
+                creds.getUsername(),
+                creds.getPassword(),
+                Collections.emptyList()
+        ));
+
+        return authentication;
     }
 
     @Override
@@ -42,7 +45,7 @@ public class JWTLoginFilter extends AbstractAuthenticationProcessingFilter {
             HttpServletRequest req,
             HttpServletResponse res, FilterChain chain,
             Authentication auth) throws IOException, ServletException {
-        TokenAuthenticationService
-                .addAuthentication(res, auth.getName());
+
+        TokenAuthenticationService.addAuthentication(res, auth.getName());
     }
 }
