@@ -12,6 +12,9 @@ import java.util.Collection;
 @Entity
 @Table(name = "categories")
 public class Category {
+
+    private static LocalDateTime localDateTime = LocalDateTime.now();
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", unique = true)
@@ -31,4 +34,14 @@ public class Category {
 
     @OneToMany(mappedBy = "category")
     private Collection<Event> events;
+
+    @PreUpdate
+    private void onPreUpdate(){
+        setUpdateDate(localDateTime);
+    }
+
+    @PrePersist
+    private void onPrePersist(){
+        setJoinDate(localDateTime);
+    }
 }

@@ -11,6 +11,9 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "users")
 public class User {
+
+    private static LocalDateTime localDateTime = LocalDateTime.now();
+
     @Id
     @Column(name ="id", unique = true)
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -30,4 +33,15 @@ public class User {
 
     @Column(name = "last_update")
     private LocalDateTime updateDateUser;
+
+    @PrePersist
+    private void onPrePersist(){
+      setJoinDate(localDateTime);
+    }
+
+    @PreUpdate
+    private void onPreUpdate(){
+        setUpdateDateUser(localDateTime);
+    }
+
 }
