@@ -1,27 +1,42 @@
 package com.mentorme.mentor.controller;
 
-import com.mentorme.mentor.dto.UserDto;
-import com.mentorme.mentor.service.user.UserService;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import com.mentorme.mentor.Exceptions.UserExceptions;
+import com.mentorme.mentor.dto.Event.EventDto;
+import com.mentorme.mentor.dto.Event.NewEventDto;
+import com.mentorme.mentor.service.event.EventService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
-
+import java.util.List;
 
 @RestController
+@RequestMapping(path = "/event")
 public class EventController {
-    private UserService userService;
 
-    public  EventController(UserService userService){ this.userService = userService; }
+   @Autowired
+   private EventService eventService;
 
-    @RequestMapping(path = "add", method = RequestMethod.GET)
-    public UserDto addNewUser(){
-        String name = "dan";
-        Integer roleId  = 10;
+   public EventController(EventService eventService){this.eventService = eventService;}
 
+    @RequestMapping(value = "/add/{roleId}", method = RequestMethod.POST)
+    public EventDto addUser(@PathVariable Integer roleId,
+                            @RequestBody NewEventDto newEventDto) {
 
-        return userService.save(name,roleId);
+        if (roleId >= 2) {
+            return eventService.save(newEventDto);
+        } else {
+           throw new UserExceptions("### Invalid RoleID ###");
+        }
     }
 
+    @RequestMapping(value = "/events", method = RequestMethod.GET)
+    public List<EventDto> getEvents(){
+        return eventService.getEvents();
+    }
+
+    @RequestMapping(value = "/events/{eventId}", method = RequestMethod.GET)
+    public EventDto getEvent(@PathVariable Long eventId){
+        return eventService.getEvents(eventId);
+    }
 
 }
