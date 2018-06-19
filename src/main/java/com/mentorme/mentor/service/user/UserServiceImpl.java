@@ -1,6 +1,5 @@
 package com.mentorme.mentor.service.user;
 
-import java.time.LocalDateTime;
 import java.util.Comparator;
 import java.util.List;
 import java.util.logging.*;
@@ -19,7 +18,6 @@ import org.springframework.util.Assert;
 @Service
 public class UserServiceImpl implements UserService {
     private static final Logger LOGGER = Logger.getLogger(UserServiceImpl.class.getName());
-    private static LocalDateTime localDateTime = LocalDateTime.now();
 
     @Autowired
     private UserRepo userRepo;
@@ -29,7 +27,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserDto save(NewUserDto newUserDto) {
 
-        User userEntity = UserMapper.mapEntity(newUserDto,localDateTime);
+        User userEntity = UserMapper.mapEntity(newUserDto);
 
         User savedUser = userRepo.save(userEntity);
 
@@ -64,7 +62,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserDto update(UpdateUserDto updateUserDto) {
         User userEntity = getUserEntity(updateUserDto.getId());
-        userEntity = UserMapper.mapEntity(userEntity, updateUserDto, localDateTime);
+        userEntity = UserMapper.mapEntity(userEntity, updateUserDto);
 
         return UserMapper.mapDto(userRepo.save(userEntity));
     }

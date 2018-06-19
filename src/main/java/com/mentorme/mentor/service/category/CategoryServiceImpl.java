@@ -23,12 +23,10 @@ public class CategoryServiceImpl implements CategoryService{
 
     public CategoryServiceImpl(CategoryRepo categoryRepo){this.categoryRepo = categoryRepo;}
 
-    private static LocalDateTime localDateTime = LocalDateTime.now();
-
     @Override
     public CategoryDto save(NewCategoryDto newCategoryDto) {
 
-        Category category = CategoryMapper.mapEntity(newCategoryDto,localDateTime);
+        Category category = CategoryMapper.mapEntity(newCategoryDto);
 
         Category savedCategory = categoryRepo.save(category);
         return CategoryMapper.mapDto(savedCategory);
@@ -38,7 +36,7 @@ public class CategoryServiceImpl implements CategoryService{
     public CategoryDto update(UpdateCategoryDto updateCategoryDto) {
 
         Category category = getCategory(updateCategoryDto.getId());
-                 category = CategoryMapper.mapEntity(category,updateCategoryDto,localDateTime);
+                 category = CategoryMapper.mapEntity(category,updateCategoryDto);
 
         return CategoryMapper.mapDto(categoryRepo.save(category));
     }
