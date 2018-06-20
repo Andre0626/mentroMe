@@ -3,39 +3,39 @@ package com.mentorme.mentor.service.user.mapper;
 import com.mentorme.mentor.dto.User.NewUserDto;
 import com.mentorme.mentor.dto.User.UpdateUserDto;
 import com.mentorme.mentor.dto.User.UserDto;
-import com.mentorme.mentor.entity.User;
+import com.mentorme.mentor.entity.UserEntity;
 
 public class UserMapper {
 
-    public static User mapEntity(NewUserDto newUserDto) {
-        User user = new User();
-        user.setName(newUserDto.getUserName());
-        user.setRoleId(newUserDto.getRoleId());
-        user.setEmail(newUserDto.getUserEmail());
+    public static UserEntity mapEntity(NewUserDto newUserDto) {
+        UserEntity userEntity = new UserEntity();
+        userEntity.setName(newUserDto.getUserName());
+        userEntity.setRoleId(newUserDto.getRoleId());
+        userEntity.setEmail(newUserDto.getUserEmail());
 
-        return user;
+        return userEntity;
     }
 
-    public static UserDto mapDto(User user) {
+    public static UserDto mapDto(UserEntity userEntity) {
 
         UserDto userDto = new UserDto();
 
-        userDto.setName(user.getName());
-        userDto.setId(user.getId());
-        userDto.setEmail(user.getEmail());
-        userDto.setRoleId(user.getRoleId());
-        userDto.setJoinDate(user.getJoinDate());
-        userDto.setLastUpdate(user.getUpdateDateUser());
+        userDto.setName(userEntity.getName());
+        userDto.setId(userEntity.getId());
+        userDto.setEmail(userEntity.getEmail());
+        userDto.setRoleId(userEntity.getRoleId());
+        userDto.setJoinDate(userEntity.getJoinDate());
+        userDto.setLastUpdate(userEntity.getUpdateDateUser());
 
         return userDto;
     }
 
-    public static User mapEntity(User user, UpdateUserDto updateUserDto) {
-        user.setId(updateUserDto.getId());
-        user.setName(updateUserDto.getName());
-        user.setRoleId(updateUserDto.getRoleId());
-        user.setEmail(updateUserDto.getEmail());
+    public static UserEntity mapEntity(UserEntity userEntity, UpdateUserDto updateUserDto) {
+        userEntity.setId(updateUserDto.getId());
+        userEntity.setName(updateUserDto.getName());
+        userEntity.setRoleId(updateUserDto.getRoleId());
+        userEntity.setEmail(updateUserDto.getEmail());
 
-        return user;
+        return userEntity;
     }
 }

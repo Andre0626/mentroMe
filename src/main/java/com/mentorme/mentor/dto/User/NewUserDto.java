@@ -9,5 +9,7 @@ public class NewUserDto {
 
    private String userName;
    private String userEmail;
+   private String password;
    private Integer roleId;
+
 }

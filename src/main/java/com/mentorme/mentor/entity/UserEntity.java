@@ -10,9 +10,9 @@ import java.time.LocalDateTime;
 @Getter
 @Entity
 @Table(name = "users")
-public class User {
+public class UserEntity {
 
-    private static LocalDateTime localDateTime = LocalDateTime.now();
+    //private  LocalDateTime localDateTime =  LocalDateTime.now();
 
     @Id
     @Column(name ="id", unique = true)
@@ -34,14 +34,17 @@ public class User {
     @Column(name = "last_update")
     private LocalDateTime updateDateUser;
 
+    @Column(name = "password")
+    private String password;
+
     @PrePersist
     private void onPrePersist(){
-      setJoinDate(localDateTime);
+      setJoinDate(LocalDateTime.now());
     }
 
     @PreUpdate
     private void onPreUpdate(){
-        setUpdateDateUser(localDateTime);
+        setUpdateDateUser(LocalDateTime.now());
     }
 
 }

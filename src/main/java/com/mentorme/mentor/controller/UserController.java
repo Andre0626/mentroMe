@@ -4,7 +4,7 @@ import java.util.List;
 import com.mentorme.mentor.dto.User.NewUserDto;
 import com.mentorme.mentor.dto.User.UpdateUserDto;
 import com.mentorme.mentor.dto.User.UserDto;
-import com.mentorme.mentor.entity.User;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import com.mentorme.mentor.service.user.UserService;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,11 +17,18 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserController {
 
     private UserService userService;
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    public UserController(UserService userService){this.userService = userService;}
+    public UserController(UserService userService,
+                          BCryptPasswordEncoder bCryptPasswordEncoder) {
+        this.userService = userService;
+        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
+    }
 
-    @RequestMapping(method = RequestMethod.POST )
+    @RequestMapping(value = "/sign-up" ,method = RequestMethod.POST )
     public UserDto create(@RequestBody NewUserDto newUserDto){
+
+        newUserDto.setPassword(bCryptPasswordEncoder.encode(newUserDto.getPassword()));
 
         return userService.save(newUserDto);
     }
