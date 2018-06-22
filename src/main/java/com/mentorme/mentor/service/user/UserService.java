@@ -4,6 +4,7 @@ import java.util.List;
 import com.mentorme.mentor.dto.User.NewUserDto;
 import com.mentorme.mentor.dto.User.UpdateUserDto;
 import com.mentorme.mentor.dto.User.UserDto;
+import com.mentorme.mentor.dto.User.UserSignInDto;
 
 
 public interface UserService {

@@ -8,5 +8,5 @@ public interface UserRepo extends JpaRepository<UserEntity,Long> {
 
     List<UserEntity> findAllByRoleId(Integer roleId);
 
-    UserEntity findByUsername(String username);
+    UserEntity findByEmail(String email);
 }

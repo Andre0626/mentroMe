@@ -9,9 +9,10 @@ public class UserMapper {
 
     public static UserEntity mapEntity(NewUserDto newUserDto) {
         UserEntity userEntity = new UserEntity();
-        userEntity.setName(newUserDto.getUserName());
+        userEntity.setName(newUserDto.getName());
         userEntity.setRoleId(newUserDto.getRoleId());
-        userEntity.setEmail(newUserDto.getUserEmail());
+        userEntity.setEmail(newUserDto.getEmail());
+        userEntity.setPassword(newUserDto.getPassword());
 
         return userEntity;
     }
@@ -20,7 +21,7 @@ public class UserMapper {
 
         UserDto userDto = new UserDto();
 
-        userDto.setName(userEntity.getName());
+        userDto.setName(userEntity.getUsername());
         userDto.setId(userEntity.getId());
         userDto.setEmail(userEntity.getEmail());
         userDto.setRoleId(userEntity.getRoleId());
