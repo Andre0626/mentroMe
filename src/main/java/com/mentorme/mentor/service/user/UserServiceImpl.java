@@ -33,6 +33,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional
     public UserDto save(NewUserDto newUserDto) {
         Role role = getRole(newUserDto.getRoleId());
         UserEntity userEntityEntity = UserMapper.mapEntity(newUserDto, role);
@@ -68,6 +69,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional
     public UserDto update(UpdateUserDto updateUserDto) {
         UserEntity userEntityEntity = getUserEntity(updateUserDto.getId());
         Role role = getRole(updateUserDto.getRoleId());
@@ -77,21 +79,20 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional
     public void delete(Long id) {
         userRepo.deleteById(id);
         LOGGER.info("successful delete user id :" + id + "######");
     }
 
-    @Transactional
-    public UserEntity getUserEntity(Long userId) {
+
+    private UserEntity getUserEntity(Long userId) {
         UserEntity userEntityEntity = userRepo.getOne(userId);
         Assert.notNull(userEntityEntity, "UserEntity with id = " + userId + "does not exist");
         return userEntityEntity;
     }
 
-
-    @Transactional
-    public Role getRole(Long id) {
+    private Role getRole(Long id) {
 
         return roleRepo.getOne(id);
     }

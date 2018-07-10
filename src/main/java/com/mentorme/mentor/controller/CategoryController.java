@@ -6,6 +6,7 @@ import com.mentorme.mentor.dto.Category.NewCategoryDto;
 import com.mentorme.mentor.dto.Category.UpdateCategoryDto;
 import com.mentorme.mentor.service.category.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,22 +20,26 @@ public class CategoryController {
     @Autowired
     private CategoryService categoryService;
 
-    public CategoryController(CategoryService categoryService){this.categoryService = categoryService;}
+    public CategoryController(CategoryService categoryService) {
+        this.categoryService = categoryService;
+    }
 
     @RequestMapping(method = RequestMethod.POST)
-    public CategoryDto create(@RequestBody NewCategoryDto newCategoryDto){
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    public CategoryDto create(@RequestBody NewCategoryDto newCategoryDto) {
 
         return categoryService.save(newCategoryDto);
     }
 
     @RequestMapping(method = RequestMethod.PUT)
-    public CategoryDto update(@RequestBody UpdateCategoryDto updateCategoryDto){
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    public CategoryDto update(@RequestBody UpdateCategoryDto updateCategoryDto) {
 
         return categoryService.update(updateCategoryDto);
     }
 
     @RequestMapping(method = RequestMethod.GET)
-    public List<CategoryDto> findAll(){
+    public List<CategoryDto> findAll() {
 
         return categoryService.findAll();
     }
@@ -46,8 +51,9 @@ public class CategoryController {
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-    public void delete(@PathVariable Long id){
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    public void delete(@PathVariable Long id) {
 
-         categoryService.delete(id);
+        categoryService.delete(id);
     }
 }
