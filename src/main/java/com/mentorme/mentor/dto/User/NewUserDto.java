@@ -10,6 +10,7 @@ public class NewUserDto {
    private String name;
    private String email;
    private String password;
-   private Integer roleId;
+   private Long roleId;
+   private String characterPassword;
 
 }

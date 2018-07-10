@@ -28,50 +28,46 @@ public class UserController {
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
 
-    @RequestMapping(value = "/sign-up" ,method = RequestMethod.POST )
-    public void signUp(@RequestBody NewUserDto newUserDto){
+    @RequestMapping(value = "/sign-up", method = RequestMethod.POST)
+    public void signUp(@RequestBody NewUserDto newUserDto) {
 
-         newUserDto.setPassword(bCryptPasswordEncoder.encode(newUserDto.getPassword()));
+        newUserDto.setCharacterPassword(newUserDto.getPassword());
+        newUserDto.setPassword(bCryptPasswordEncoder.encode(newUserDto.getPassword()));
 
-         userService.save(newUserDto);
+        userService.save(newUserDto);
     }
 
-    @RequestMapping(method = RequestMethod.POST )
-    public UserDto create(@RequestBody NewUserDto newUserDto){
-
-      //  newUserDto.setPassword(bCryptPasswordEncoder.encode(newUserDto.getPassword()));
-
-        return userService.save(newUserDto);
-    }
-
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @RequestMapping(method = RequestMethod.GET)
-    public List<UserDto> getAll(){
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USER')")
+    public List<UserDto> getAll() {
 
         return userService.getAll();
     }
 
-    @PreAuthorize("hasRole('ANDREI')")
-    @RequestMapping(value ="/{id}", method = RequestMethod.GET)
-    public UserDto findOne(@PathVariable("id") Long id){
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    public UserDto findOne(@PathVariable("id") Long id) {
 
         return userService.findById(id);
     }
 
-    @RequestMapping(value ="role/{roleId}", method = RequestMethod.GET)
-    public List<UserDto> findByRoleId(@PathVariable("roleId") Integer roleId){
+    @RequestMapping(value = "role/{roleId}", method = RequestMethod.GET)
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    public List<UserDto> findByRoleId(@PathVariable("roleId") Long roleId) {
 
         return userService.findByRoleId(roleId);
     }
 
     @RequestMapping(method = RequestMethod.PUT)
-    public UserDto update(@RequestBody UpdateUserDto updateUserDto){
+    public UserDto update(@RequestBody UpdateUserDto updateUserDto) {
 
         return userService.update(updateUserDto);
     }
 
+
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-    public void delete(@PathVariable("id") Long id){
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    public void delete(@PathVariable("id") Long id) {
         userService.delete(id);
     }
 }

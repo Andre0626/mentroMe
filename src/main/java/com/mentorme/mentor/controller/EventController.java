@@ -1,10 +1,10 @@
 package com.mentorme.mentor.controller;
 
-import com.mentorme.mentor.Exceptions.UserExceptions;
 import com.mentorme.mentor.dto.Event.EventDto;
 import com.mentorme.mentor.dto.Event.NewEventDto;
 import com.mentorme.mentor.service.event.EventService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,15 +18,11 @@ public class EventController {
 
    public EventController(EventService eventService){this.eventService = eventService;}
 
-    @RequestMapping(value = "/add/{roleId}", method = RequestMethod.POST)
-    public EventDto addUser(@PathVariable Integer roleId,
-                            @RequestBody NewEventDto newEventDto) {
+    @RequestMapping(value = "/add", method = RequestMethod.POST)
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    public EventDto addEvent(@RequestBody NewEventDto newEventDto) {
 
-        if (roleId >= 2) {
             return eventService.save(newEventDto);
-        } else {
-           throw new UserExceptions("### Invalid RoleID ###");
-        }
     }
 
     @RequestMapping(value = "/events", method = RequestMethod.GET)

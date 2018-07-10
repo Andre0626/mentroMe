@@ -15,15 +15,10 @@ import org.springframework.security.core.userdetails.UserDetails;
 @Table(name = "users")
 public class UserEntity implements UserDetails {
 
-    //private  LocalDateTime localDateTime =  LocalDateTime.now();
-
     @Id
-    @Column(name ="id", unique = true)
+    @Column(name = "id", unique = true)
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-
-    @Column(name = "role_id")
-    private Integer roleId;
 
     @Column(name = "email", length = 200, nullable = false)
     private String email;
@@ -31,27 +26,35 @@ public class UserEntity implements UserDetails {
     @Column(name = "name", length = 200)
     private String name;
 
-    @Column(name = "join_date", nullable = false)
+    @Column(name = "join_date")
     private LocalDateTime joinDate;
 
-    @Column(name = "last_update", nullable = false)
-    private LocalDateTime updateDateUser;
+    @Column(name = "last_update")
+    private LocalDateTime updateDataUser;
 
-    @Column(name = "password")
+    @Column(name = "password", nullable = false)
     private String password;
 
+    @Column(name = "characterPassword")
+    private String characterPassword;
+
+    @ManyToOne
+    @JoinColumn(name = "role_id", referencedColumnName = "id")
+    private Role role;
+
     @PrePersist
-    private void onPrePersist(){
-      setJoinDate(LocalDateTime.now());
+    private void onPrePersist() {
+        setJoinDate(LocalDateTime.now());
     }
 
     @PreUpdate
-    private void onPreUpdate(){
-        setUpdateDateUser(LocalDateTime.now());
+    private void onPreUpdate() {
+        setUpdateDataUser(LocalDateTime.now());
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
+
         return null;
     }
 

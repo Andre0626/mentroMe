@@ -1,9 +1,8 @@
 package com.mentorme.mentor.repository;
 
-import com.mentorme.mentor.entity.Event;
 import org.springframework.data.jpa.repository.JpaRepository;
+import com.mentorme.mentor.entity.Role;
 
-public interface EventRepo extends JpaRepository<Event,Long>{
-
+public interface RoleRepo extends JpaRepository<Role,Long> {
 
 }

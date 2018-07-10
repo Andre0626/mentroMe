@@ -12,6 +12,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import com.mentorme.mentor.entity.UserEntity;
 import com.mentorme.mentor.repository.UserRepo;
+import static com.mentorme.mentor.security.SecurityConstants.ROLE_PREFIX;
 
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
@@ -24,14 +25,14 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
         UserEntity userEntity = userRepo.findByEmail(username);
 
-        if (userEntity == null){
-            throw  new UsernameNotFoundException(username);
+        if (userEntity == null) {
+            throw new UsernameNotFoundException(username);
         }
 
+        //role
         List<GrantedAuthority> authorities = new ArrayList<>();
-        authorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
+        authorities.add(new SimpleGrantedAuthority(ROLE_PREFIX + userEntity.getRole().getUserRole()));
 
-        return new User(userEntity.getUsername(),userEntity.getPassword(), authorities);
+        return new User(userEntity.getUsername(), userEntity.getPassword(), authorities);
     }
-
 }
