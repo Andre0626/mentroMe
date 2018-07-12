@@ -17,11 +17,8 @@ public class Location {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name = "city_id")
-    private Integer cityId;
-
     @Column(name = "location")
-    private String location;
+    private String locationName;
 
     @Column(name = "location_address")
     private String locationAddress;
@@ -30,6 +27,6 @@ public class Location {
     private Collection<Event> events;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "city_id", referencedColumnName = "id", nullable = false, insertable = false, updatable = false)
+    @JoinColumn(name = "city_id", referencedColumnName = "id")
     private City city;
 }

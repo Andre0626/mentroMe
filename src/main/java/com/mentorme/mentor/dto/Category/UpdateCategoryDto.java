@@ -10,4 +10,5 @@ public class UpdateCategoryDto {
     private Long id;
     private String name;
     private String description;
+
 }

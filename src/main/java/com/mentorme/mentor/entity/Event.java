@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.Collection;
 
 @Setter
@@ -16,29 +17,36 @@ public class Event {
     @Column(name = "id", unique = true)
     private Long id;
 
-    @Column(name = "user_id", unique = true)
-    private Long userId;
-
-    @Column(name = "category_id", nullable = false, insertable = false, updatable = false)
-    private Long categoryId;
-
-    @Column(name = "location_id", nullable = false, insertable = false, updatable = false)
-    private Long locationId;
-
-    @Column(name = "name")
+    @Column(name = "name", nullable = false)
     private String name;
 
     @Column(name = "description")
     private String description;
 
+    @Column(name = "created_at")
+    private LocalDateTime createdAt;
+
+    @Column(name = "last_update")
+    private LocalDateTime updateEvent;
+
     @OneToMany(mappedBy = "event", fetch = FetchType.LAZY)
     private Collection<Session> sessions;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "category_id")
+    @JoinColumn(name = "category_id", referencedColumnName = "id")
     private Category category;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "location_id")
+    @JoinColumn(name = "location_id", referencedColumnName = "id")
     private Location locations;
+
+    @PrePersist
+    private void onPrePersist() {
+        setCreatedAt(LocalDateTime.now());
+    }
+
+    @PreUpdate
+    private void onPreUpdate() {
+        setUpdateEvent(LocalDateTime.now());
+    }
 }

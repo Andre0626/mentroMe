@@ -1,13 +1,19 @@
 package com.mentorme.mentor.service.category.mapper;
 
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.stream.Collectors;
 import com.mentorme.mentor.dto.Category.CategoryDto;
 import com.mentorme.mentor.dto.Category.NewCategoryDto;
 import com.mentorme.mentor.dto.Category.UpdateCategoryDto;
+import com.mentorme.mentor.dto.Event.EventDto;
 import com.mentorme.mentor.entity.Category;
+import com.mentorme.mentor.entity.Event;
+import com.mentorme.mentor.service.event.mapper.EventMapper;
 
 public class CategoryMapper {
 
-  public   static CategoryDto mapDto(Category category){
+    public static CategoryDto mapDto(Category category) {
         CategoryDto categoryDto = new CategoryDto();
 
         categoryDto.setId(category.getId());
@@ -16,10 +22,24 @@ public class CategoryMapper {
         categoryDto.setJoinDate(category.getJoinDate());
         categoryDto.setUpdateDate(category.getUpdateDate());
 
+        if (!category.getEvents().isEmpty()) {
+
+            for (Event event : category.getEvents()) {
+                categoryDto.getEventsDto().add(EventMapper.mapDto(event));
+            }
+        } else {
+            categoryDto.setEventsDto(new ArrayList<>());
+        }
+
+        categoryDto.getEventsDto()
+                .stream()
+                .sorted(Comparator.comparing(EventDto::getJoinDate))
+                .collect(Collectors.toList());
+
         return categoryDto;
     }
 
-   public static Category mapEntity(NewCategoryDto newCategoryDto){
+    public static Category mapEntity(NewCategoryDto newCategoryDto) {
         Category category = new Category();
 
         category.setDescription(newCategoryDto.getDescription());
@@ -28,7 +48,7 @@ public class CategoryMapper {
         return category;
     }
 
-    public static Category mapEntity(Category category, UpdateCategoryDto UpdateCategoryDto){
+    public static Category mapEntity(Category category, UpdateCategoryDto UpdateCategoryDto) {
 
         category.setDescription(UpdateCategoryDto.getDescription());
         category.setName(UpdateCategoryDto.getName());
