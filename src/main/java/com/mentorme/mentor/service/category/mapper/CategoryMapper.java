@@ -3,6 +3,7 @@ package com.mentorme.mentor.service.category.mapper;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.stream.Collectors;
+import org.springframework.util.CollectionUtils;
 import com.mentorme.mentor.dto.Category.CategoryDto;
 import com.mentorme.mentor.dto.Category.NewCategoryDto;
 import com.mentorme.mentor.dto.Category.UpdateCategoryDto;
@@ -22,7 +23,7 @@ public class CategoryMapper {
         categoryDto.setJoinDate(category.getJoinDate());
         categoryDto.setUpdateDate(category.getUpdateDate());
 
-        if (!category.getEvents().isEmpty()) {
+        if (!CollectionUtils.isEmpty(category.getEvents())) {
 
             for (Event event : category.getEvents()) {
                 categoryDto.getEventsDto().add(EventMapper.mapDto(event));

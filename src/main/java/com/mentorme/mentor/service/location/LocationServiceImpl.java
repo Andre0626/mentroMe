@@ -15,9 +15,9 @@ import com.mentorme.mentor.service.location.mapper.LocationMapper;
 public class LocationServiceImpl implements LocationService {
 
     @Autowired
-    LocationRepo locationRepo;
+    private   LocationRepo locationRepo;
     @Autowired
-    CityRepo cityRepo;
+    private   CityRepo cityRepo;
 
     public LocationServiceImpl(LocationRepo locationRepo, CityRepo cityRepo){
         this.locationRepo = locationRepo;

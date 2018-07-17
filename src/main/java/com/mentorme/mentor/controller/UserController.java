@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(path = "/users")
 public class UserController {
 
-    @Autowired
     private UserService userService;
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
