@@ -10,6 +10,7 @@ import com.mentorme.mentor.repository.EventRepo;
 import com.mentorme.mentor.repository.LocationRepo;
 import com.mentorme.mentor.service.event.mapper.EventMapper;
 import com.mentorme.mentor.service.location.mapper.LocationMapper;
+import com.mentorme.mentor.service.user.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
@@ -18,9 +19,12 @@ import org.springframework.util.CollectionUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 @Service
 public class EventServiceImpl implements EventService {
+
+    private static final Logger LOGGER = Logger.getLogger(UserServiceImpl.class.getName());
 
     @Autowired
     private EventRepo eventRepo;
@@ -46,8 +50,8 @@ public class EventServiceImpl implements EventService {
     public EventDto save(NewEventDto newEventDto) {
         Location location = getLocation(newEventDto.getLocationId());
 
-        if (location == null){
-        //@TODO add new location if not exist
+        if (location == null) {
+            //@TODO add new location if not exist
         }
         Category category = getCategory(newEventDto.getCategoryId());
 
@@ -92,6 +96,14 @@ public class EventServiceImpl implements EventService {
         Event updateEvent = EventMapper.mapEntity(event, category, updateLocation, updateEventDto);
 
         return EventMapper.mapDto(eventRepo.save(updateEvent));
+    }
+
+    @Override
+    public void delete(Long eventId) {
+        String eventName = getEvent(eventId).getName();
+
+        eventRepo.deleteById(eventId);
+        LOGGER.info("successful event delete :" + "eventId :" + " " + eventId + " " + "EventName: " + " " + eventName + " " + "######");
     }
 
     @Transactional(readOnly = true)

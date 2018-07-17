@@ -14,32 +14,40 @@ import java.util.List;
 @RequestMapping(path = "/event")
 public class EventController {
 
-   @Autowired
-   private EventService eventService;
+    @Autowired
+    private EventService eventService;
 
-   public EventController(EventService eventService){this.eventService = eventService;}
+    public EventController(EventService eventService) {
+        this.eventService = eventService;
+    }
 
     @RequestMapping(method = RequestMethod.POST)
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     public EventDto addEvent(@RequestBody NewEventDto newEventDto) {
 
-            return eventService.save(newEventDto);
+        return eventService.save(newEventDto);
     }
 
     @RequestMapping(method = RequestMethod.GET)
-    public List<EventDto> getEvents(){
+    public List<EventDto> getEvents() {
         return eventService.getEvents();
     }
 
     @RequestMapping(value = "/{eventId}", method = RequestMethod.GET)
-    public EventDto getEvent(@PathVariable Long eventId){
+    public EventDto getEvent(@PathVariable Long eventId) {
         return eventService.getEvents(eventId);
     }
 
     @RequestMapping(method = RequestMethod.PUT)
-    public EventDto update(@RequestBody UpdateEventDto updateEventDto){
+    public EventDto update(@RequestBody UpdateEventDto updateEventDto) {
 
         return eventService.update(updateEventDto);
+    }
+
+    @DeleteMapping(value = "/{eventId}")
+    public void delete(@PathVariable Long eventId) {
+
+        eventService.delete(eventId);
     }
 
 }

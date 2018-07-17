@@ -7,7 +7,7 @@ import com.mentorme.mentor.dto.Event.UpdateEventDto;
 import java.util.List;
 
 public interface EventService {
-    
+
     EventDto save(NewEventDto newEventDto);
 
     List<EventDto> getEvents();
@@ -15,4 +15,6 @@ public interface EventService {
     EventDto getEvents(Long eventId);
 
     EventDto update(UpdateEventDto updateEventDto);
+
+    void delete(Long eventId);
 }
