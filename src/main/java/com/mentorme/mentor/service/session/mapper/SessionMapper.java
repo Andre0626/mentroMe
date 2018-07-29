@@ -1,31 +1,34 @@
 package com.mentorme.mentor.service.session.mapper;
 
+import com.mentorme.mentor.dto.Session.NewSessionDto;
 import com.mentorme.mentor.dto.Session.SessionDto;
+import com.mentorme.mentor.entity.Event;
 import com.mentorme.mentor.entity.Session;
 
-import java.sql.Date;
+import static com.mentorme.mentor.DateTimeFormat.DateTimeFormat.convertStringToDate;
 
 public class SessionMapper {
 
     public static SessionDto mapDto(Session session) {
         SessionDto sessionDto = new SessionDto();
         sessionDto.setId(session.getId());
-        //sessionDto.setEventId(session.getEventId());
+        sessionDto.setEventId(session.getEvent().getId());
         sessionDto.setName(session.getName());
         sessionDto.setDescription(session.getDescription());
+        sessionDto.setEndDate(session.getEndDate());
         sessionDto.setStartDate(session.getStartDate());
-        sessionDto.setEndDate(session.getStartDate());
+
 
         return sessionDto;
     }
 
-    public static Session mapEntity(Long eventId, String name, String description, Date startDate, Date endDate) {
+    public static Session mapEntity(NewSessionDto newSessionDto, Event event) {
         Session session = new Session();
-       // session.setEventId(eventId);
-        session.setName(name);
-        session.setDescription(description);
-        session.setStartDate(startDate);
-        session.setEndDate(endDate);
+        session.setName(newSessionDto.getName());
+        session.setDescription(newSessionDto.getDescription());
+        session.setEvent(event);
+        session.setStartDate(convertStringToDate(newSessionDto.getStartDate()));
+        session.setEndDate(convertStringToDate(newSessionDto.getEndDate()));
 
         return session;
     }

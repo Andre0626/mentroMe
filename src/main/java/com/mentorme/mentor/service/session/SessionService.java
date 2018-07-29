@@ -1,10 +1,12 @@
 package com.mentorme.mentor.service.session;
 
+import java.util.List;
+import com.mentorme.mentor.dto.Session.NewSessionDto;
 import com.mentorme.mentor.dto.Session.SessionDto;
-
-import java.sql.Date;
 
 public interface SessionService {
 
-    SessionDto save(Long eventId, String name, String description, Date startDate, Date endDate);
+    SessionDto save(NewSessionDto newSessionDto);
+
+    List<SessionDto> getSessions();
 }
