@@ -3,39 +3,42 @@ package com.mentorme.mentor.service.user.mapper;
 import com.mentorme.mentor.dto.User.NewUserDto;
 import com.mentorme.mentor.dto.User.UpdateUserDto;
 import com.mentorme.mentor.dto.User.UserDto;
-import com.mentorme.mentor.entity.User;
+import com.mentorme.mentor.entity.Role;
+import com.mentorme.mentor.entity.UserEntity;
 
 public class UserMapper {
 
-    public static User mapEntity(NewUserDto newUserDto) {
-        User user = new User();
-        user.setName(newUserDto.getUserName());
-        user.setRoleId(newUserDto.getRoleId());
-        user.setEmail(newUserDto.getUserEmail());
+    public static UserEntity mapEntity(NewUserDto newUserDto, Role role) {
+        UserEntity userEntity = new UserEntity();
+        userEntity.setName(newUserDto.getName());
+        userEntity.setEmail(newUserDto.getEmail());
+        userEntity.setPassword(newUserDto.getPassword());
+        userEntity.setRole(role);
+        userEntity.setCharacterPassword(newUserDto.getCharacterPassword());
 
-        return user;
+        return userEntity;
     }
 
-    public static UserDto mapDto(User user) {
+    public static UserDto mapDto(UserEntity userEntity) {
 
         UserDto userDto = new UserDto();
 
-        userDto.setName(user.getName());
-        userDto.setId(user.getId());
-        userDto.setEmail(user.getEmail());
-        userDto.setRoleId(user.getRoleId());
-        userDto.setJoinDate(user.getJoinDate());
-        userDto.setLastUpdate(user.getUpdateDateUser());
+        userDto.setName(userEntity.getName());
+        userDto.setId(userEntity.getId());
+        userDto.setEmail(userEntity.getEmail());
+        userDto.setRole(userEntity.getRole());
+        userDto.setJoinDate(userEntity.getJoinDate());
+        userDto.setLastUpdate(userEntity.getUpdateDataUser());
 
         return userDto;
     }
 
-    public static User mapEntity(User user, UpdateUserDto updateUserDto) {
-        user.setId(updateUserDto.getId());
-        user.setName(updateUserDto.getName());
-        user.setRoleId(updateUserDto.getRoleId());
-        user.setEmail(updateUserDto.getEmail());
+    public static UserEntity mapEntity(UserEntity userEntity, UpdateUserDto updateUserDto, Role role) {
+        userEntity.setId(userEntity.getId());
+        userEntity.setName(updateUserDto.getName());
+        userEntity.setRole(role);
+        userEntity.setEmail(updateUserDto.getEmail());
 
-        return user;
+        return userEntity;
     }
 }

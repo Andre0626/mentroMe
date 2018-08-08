@@ -3,6 +3,7 @@ package com.mentorme.mentor.dto.Event;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import com.mentorme.mentor.dto.Session.SessionDto;
@@ -12,11 +13,13 @@ import com.mentorme.mentor.dto.Session.SessionDto;
 public class EventDto {
    
     private Long id;
-    private Long userId;
     private Long categoryId;
-    private Long locationId;
     private String name;
     private String description;
+    private String locationName;
+    private String address;
+    private String city;
+    private LocalDateTime joinDate;
     private List<SessionDto> sessionList = new ArrayList<>();
     
 }

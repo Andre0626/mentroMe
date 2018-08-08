@@ -4,7 +4,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.sql.Date;
+import java.time.LocalDateTime;
+
 @Setter
 @Getter
 @Entity
@@ -15,9 +16,6 @@ public class Session {
     @Column(name = "id", unique = true)
     private Long id;
 
-    @Column(name = "event_id", nullable = false)
-    private Long eventId;
-
     @Column(name = "name")
     private String name;
 
@@ -25,13 +23,13 @@ public class Session {
     private String description;
 
     @Column(name = "start_date")
-    private Date startDate;
+    private LocalDateTime startDate;
 
     @Column(name = "end_date")
-    private Date endDate;
+    private LocalDateTime endDate;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "event_id", referencedColumnName = "id",nullable = false, insertable = false, updatable = false)
+    @JoinColumn(name = "event_id", referencedColumnName = "id")
     private Event event;
 
 }

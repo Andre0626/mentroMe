@@ -23,7 +23,7 @@ public class Category {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "description")
+    @Column(name = "description", columnDefinition = "TEXT", length = 5000, nullable = false)
     private String description;
 
     @Column(name = "join_date")
