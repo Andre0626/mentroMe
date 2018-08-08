@@ -22,11 +22,10 @@ public class SessionServiceImpl implements SessionService {
 
     private static final Logger LOGGER = Logger.getLogger(UserServiceImpl.class.getName());
 
-    @Autowired
     private SessionRepo sessionRepo;
-    @Autowired
     private EventRepo eventRepo;
 
+    @Autowired
     public SessionServiceImpl(SessionRepo sessionRepo, EventRepo eventRepo) {
         this.sessionRepo = sessionRepo;
         this.eventRepo = eventRepo;
