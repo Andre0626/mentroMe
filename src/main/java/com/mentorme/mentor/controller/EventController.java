@@ -1,27 +1,53 @@
 package com.mentorme.mentor.controller;
 
-import com.mentorme.mentor.dto.UserDto;
-import com.mentorme.mentor.service.user.UserService;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import com.mentorme.mentor.dto.Event.EventDto;
+import com.mentorme.mentor.dto.Event.NewEventDto;
+import com.mentorme.mentor.dto.Event.UpdateEventDto;
+import com.mentorme.mentor.service.event.EventService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.*;
 
-
+import java.util.List;
 
 @RestController
+@RequestMapping(path = "/event")
 public class EventController {
-    private UserService userService;
 
-    public  EventController(UserService userService){ this.userService = userService; }
+    @Autowired
+    private EventService eventService;
 
-    @RequestMapping(path = "add", method = RequestMethod.GET)
-    public UserDto addNewUser(){
-        String name = "dan";
-        Integer roleId  = 10;
-
-
-        return userService.save(name,roleId);
+    public EventController(EventService eventService) {
+        this.eventService = eventService;
     }
 
+    @RequestMapping(method = RequestMethod.POST)
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    public EventDto addEvent(@RequestBody NewEventDto newEventDto) {
+
+        return eventService.save(newEventDto);
+    }
+
+    @RequestMapping(method = RequestMethod.GET)
+    public List<EventDto> getEvents() {
+        return eventService.getEvents();
+    }
+
+    @RequestMapping(value = "/{eventId}", method = RequestMethod.GET)
+    public EventDto getEvent(@PathVariable Long eventId) {
+        return eventService.getEvents(eventId);
+    }
+
+    @RequestMapping(method = RequestMethod.PUT)
+    public EventDto update(@RequestBody UpdateEventDto updateEventDto) {
+
+        return eventService.update(updateEventDto);
+    }
+
+    @DeleteMapping(value = "/{eventId}")
+    public void delete(@PathVariable Long eventId) {
+
+        eventService.delete(eventId);
+    }
 
 }
